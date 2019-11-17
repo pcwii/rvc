@@ -62,6 +62,7 @@ def on_message(mqttc, obj, msg):
     else:
         print("NO key found")
 
+
 def on_publish(mqttc, obj, mid):
     print("mid: " + str(mid))
 
@@ -78,6 +79,6 @@ mqttc.on_connect = on_connect
 mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 mqttc.connect("192.168.0.43", 1883, 60)
-mqttc.subscribe("desktop/volume", 0)
+mqttc.subscribe("desktop/control", 0)
 mqttc.loop_forever()
 
