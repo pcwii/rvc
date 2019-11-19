@@ -75,7 +75,8 @@ def on_message(mqttc, obj, msg):
             decrease_master_volume()
     else:
         print("NO key found")
-
+    time.sleep(0.5)
+    mqttc.publish(status_topic, get_status_data())
 
 def on_publish(mqttc, obj, mid):
     print("mid: " + str(mid))
