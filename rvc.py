@@ -29,6 +29,7 @@ def get_status_data():
 
 def set_master_volume(new_level):
     audio_mixer.setvolume(new_level)  # Set the volume to 70%.
+    mqttc.publish(status_topic, get_status_data())
 
 
 def increase_master_volume():
@@ -36,16 +37,19 @@ def increase_master_volume():
     print(current_volume)
     if current_volume[0] <= 90:
         audio_mixer.setvolume(current_volume[0] + 10)  # Set the volume to 70%.
+    mqttc.publish(status_topic, get_status_data())
 
 
 def decrease_master_volume():
     current_volume = audio_mixer.getvolume()  # Get the current Volume
     if current_volume[0] >= 10:
         audio_mixer.setvolume(current_volume[0] - 10)  # Set the volume to 70%.
+    mqttc.publish(status_topic, get_status_data())
 
 
 def mute_master_volume(set_mute):
     audio_mixer.setmute(set_mute)
+    mqttc.publish(status_topic, get_status_data())
 
 
 def on_connect(mqttc, obj, flags, rc):
@@ -76,7 +80,7 @@ def on_message(mqttc, obj, msg):
     else:
         print("NO key found")
     time.sleep(0.5)
-    mqttc.publish(status_topic, get_status_data())
+
 
 def on_publish(mqttc, obj, mid):
     print("mid: " + str(mid))
