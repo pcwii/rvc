@@ -10,3 +10,6 @@ Linux Remote Volume Control
 - {"mute": 0} {"mute": 1}
 - {"volume": 10} {"volume": 20}
 
+Requires
+- pip install pyalsaaudio
+- pip install paho-mqtt
