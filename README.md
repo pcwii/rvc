@@ -8,5 +8,5 @@ Linux Remote Volume Control
 - Control Examples:
 - {"louder": false} {"louder": true}
 - {"mute": 0} {"mute": 1}
-- {"volume": 10} {"volume 20": true}
+- {"volume": 10} {"volume": 20}
 

@@ -6,7 +6,6 @@
 
 import alsaaudio
 import paho.mqtt.client as mqtt
-import paho.mqtt.publish as publish
 import json
 import time
 
@@ -100,7 +99,6 @@ mqttc.on_publish = on_publish
 mqttc.on_subscribe = on_subscribe
 mqttc.connect(broker, port, 60)
 mqttc.subscribe(control_topic, 0)
-#mqttc.loop_forever()
 mqttc.loop_start()
 while True:
     mqttc.publish(status_topic, get_status_data())
