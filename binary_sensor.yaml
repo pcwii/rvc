@@ -1,0 +1,7 @@
+- platform: mqtt
+  state_topic: "basement/desktop/status"
+  name: "Desktop Muted"
+  value_template: '{{ value_json.mute }}'
+  payload_on: 1
+  payload_off: 0
+  device_class: sound

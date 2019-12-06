@@ -1,0 +1,28 @@
+  - type: custom:vertical-stack-in-card
+    title: 'Basement Computer'
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            name: 'Volume Down'
+            icon: mdi:volume-minus
+            entity: script.computer_volume_down
+            tap_action:
+              action: call-service
+              service: script.computer_volume_down
+          - type: gauge
+            name: Volume
+            unit: '%'
+            entity: sensor.desktop_volume
+          - type: entity-button
+            name: 'Volume Up'
+            icon: mdi:volume-plus
+            entity: script.computer_volume_up
+            tap_action:
+              action: call-service
+              service: script.computer_volume_up
+      - type: entity-button
+        name: 'Mute'
+        entity: switch.computer_volume
+        tap_action:
+          action: toggle
