@@ -19,6 +19,7 @@ port = 1883
 control_topic = "basement/desktop/control"
 status_topic = "basement/desktop/status"
 status_data = {}
+volume_step = 5
 
 
 def get_status_data():
@@ -35,15 +36,15 @@ def set_master_volume(new_level):
 def increase_master_volume():
     current_volume = audio_mixer.getvolume()  # Get the current Volume
     print(current_volume)
-    if current_volume[0] <= 90:
-        audio_mixer.setvolume(current_volume[0] + 10)  # Set the volume to 70%.
+    if current_volume[0] <= (100 - volume_step):
+        audio_mixer.setvolume(current_volume[0] + volume_step)  # Set the volume to 70%.
     mqttc.publish(status_topic, get_status_data())
 
 
 def decrease_master_volume():
     current_volume = audio_mixer.getvolume()  # Get the current Volume
-    if current_volume[0] >= 10:
-        audio_mixer.setvolume(current_volume[0] - 10)  # Set the volume to 70%.
+    if current_volume[0] >= volume_step:
+        audio_mixer.setvolume(current_volume[0] - volume_step)  # Set the volume to 70%.
     mqttc.publish(status_topic, get_status_data())
 
 
@@ -79,7 +80,6 @@ def on_message(mqttc, obj, msg):
             decrease_master_volume()
     else:
         print("NO key found")
-    time.sleep(0.5)
 
 
 def on_publish(mqttc, obj, mid):
